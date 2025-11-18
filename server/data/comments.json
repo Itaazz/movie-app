@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "movieId": 1,
+    "userId": 1,
+    "username": "demo",
+    "comment": "Un chef-d'œuvre absolu ! Christopher Nolan a créé quelque chose de vraiment unique.",
+    "rating": 10,
+    "createdAt": "2025-01-18T16:45:00Z"
+  },
+  {
+    "id": 2,
+    "movieId": 4,
+    "userId": 1,
+    "username": "demo",
+    "comment": "L'un des meilleurs films que j'ai jamais vus. L'histoire est si puissante et émouvante.",
+    "rating": 10,
+    "createdAt": "2025-01-19T11:30:00Z"
+  }
+]
