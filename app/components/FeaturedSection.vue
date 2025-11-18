@@ -11,6 +11,7 @@ const filters = [
   { id: 'scifi', label: 'Science-Fiction', genre: 'Science-Fiction' },
 ]
 
+
 const { searchMovies } = useMovies()
 
 const { data: moviesData, refresh } = await useAsyncData(
@@ -25,6 +26,42 @@ const { data: moviesData, refresh } = await useAsyncData(
   },
   { watch: [activeFilter] }
 )
+
+// Simple scroll-snap carousel state
+
+
+import { ref as vueRef, computed, onMounted, onBeforeUnmount } from 'vue'
+const slidesPerView = vueRef(4)
+const track = vueRef<HTMLElement | null>(null)
+
+function updateSlidesPerView() {
+  const w = window.innerWidth
+  if (w < 640) slidesPerView.value = 1
+  else if (w < 768) slidesPerView.value = 2
+  else if (w < 1024) slidesPerView.value = 3
+  else slidesPerView.value = 4
+}
+
+onMounted(() => {
+  updateSlidesPerView()
+  window.addEventListener('resize', updateSlidesPerView)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', updateSlidesPerView)
+})
+
+const moviesList = computed(() => (((moviesData as any)?.value?.movies) || []))
+
+function prev() {
+  if (!track.value) return
+  track.value.scrollBy({ left: -track.value.clientWidth * 0.9, behavior: 'smooth' })
+}
+
+function next() {
+  if (!track.value) return
+  track.value.scrollBy({ left: track.value.clientWidth * 0.9, behavior: 'smooth' })
+}
 
 const handleFilterChange = (filterId: string) => {
   activeFilter.value = filterId as 'all' | 'action' | 'drama' | 'scifi'
@@ -57,17 +94,40 @@ const handleFilterChange = (filterId: string) => {
         </button>
       </div>
 
-      <!-- Movies Grid -->
-      <div v-if="moviesData" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        <MovieCard
-          v-for="movie in moviesData.movies"
-          :key="movie.id"
-          :movie="movie"
-          :to="`/movies/${movie.id}`"
-        />
+      <div v-if="moviesList.length" class="relative">
+        <button
+          v-if="moviesList.length > 4"
+          @click="prev"
+          class="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/60 text-white rounded-full p-2 ml-2"
+          aria-label="Précédent"
+        >
+          ‹
+        </button>
+
+        <div ref="track" class="overflow-x-auto scrollbar-none" style="scroll-behavior: smooth; -webkit-overflow-scrolling: touch;">
+          <div class="flex gap-4 items-stretch" style="scroll-snap-type: x mandatory;">
+            <div
+              v-for="movie in moviesList"
+              :key="movie.id"
+              class="flex-shrink-0 p-2"
+              :style="{ width: `${100 / slidesPerView}%`, scrollSnapAlign: 'start' }"
+            >
+              <MovieCard :movie="movie" :to="`/movies/${movie.id}`" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Next (only show when more than 4 movies) -->
+        <button
+          v-if="moviesList.length > 4"
+          @click="next"
+          class="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/60 text-white rounded-full p-2 mr-2"
+          aria-label="Suivant"
+        >
+          ›
+        </button>
       </div>
 
-      <!-- Empty State -->
       <div v-else class="text-center py-12">
         <p class="text-muted-foreground">Aucun film trouvé pour ce filtre</p>
       </div>
