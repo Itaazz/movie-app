@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import MovieCard from './MovieCard.vue'
 
 const activeFilter = ref<'all' | 'action' | 'drama' | 'scifi'>('all')
 
@@ -58,47 +59,12 @@ const handleFilterChange = (filterId: string) => {
 
       <!-- Movies Grid -->
       <div v-if="moviesData" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        <div
+        <MovieCard
           v-for="movie in moviesData.movies"
           :key="movie.id"
-          class="group relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 h-96"
-        >
-          <!-- Movie Image -->
-          <NuxtLink :to="`/movies/${movie.id}`" class="absolute inset-0">
-            <img
-              :src="movie.poster"
-              :alt="movie.title"
-              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-            />
-            <!-- Overlay gradient -->
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          </NuxtLink>
-
-          <!-- Movie Info -->
-          <div class="absolute inset-0 flex flex-col justify-end p-4 translate-y-12 group-hover:translate-y-0 transition-transform duration-300">
-            <h3 class="text-white font-bold text-lg mb-1 line-clamp-2">{{ movie.title }}</h3>
-            <p class="text-gray-300 text-sm mb-3">{{ movie.year }} • {{ movie.director }}</p>
-            
-            <!-- Rating -->
-            <div class="flex items-center space-x-2 mb-4">
-              <div class="flex items-center">
-                <span class="text-yellow-400">★</span>
-                <span class="text-white font-semibold ml-1">{{ movie.rating }}/10</span>
-              </div>
-            </div>
-
-            <!-- Genres -->
-            <div class="flex flex-wrap gap-2">
-              <span
-                v-for="genre in movie.genre.slice(0, 2)"
-                :key="genre"
-                class="text-xs bg-red-600/80 text-white rounded px-2 py-1"
-              >
-                {{ genre }}
-              </span>
-            </div>
-          </div>
-        </div>
+          :movie="movie"
+          :to="`/movies/${movie.id}`"
+        />
       </div>
 
       <!-- Empty State -->
