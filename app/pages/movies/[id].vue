@@ -65,11 +65,11 @@ const handleAddFavorite = async () => {
 
 <template>
   <div class="container mx-auto p-6">
-    <NuxtLink to="/" class="text-blue-600 hover:underline mb-4 inline-block">
+    <NuxtLink to="/" class="text-primary hover:underline mb-4 inline-block">
       ← Retour à la liste
     </NuxtLink>
 
-    <div v-if="movieError" class="text-red-500">
+    <div v-if="movieError" class="text-destructive">
       <p>Film non trouvé</p>
     </div>
 
@@ -84,17 +84,17 @@ const handleAddFavorite = async () => {
         
         <div class="flex-1">
           <h1 class="text-4xl font-bold mb-2">{{ movie.title }}</h1>
-          <p class="text-xl text-gray-600 mb-4">{{ movie.year }}</p>
+          <p class="text-xl text-muted-foreground mb-4">{{ movie.year }}</p>
           
           <div class="flex items-center gap-4 mb-4">
             <div class="flex items-center">
-              <span class="text-yellow-500 text-2xl">★</span>
+              <span class="text-accent text-2xl">★</span>
               <span class="ml-1 text-xl font-medium">{{ movie.rating }}/10</span>
             </div>
             
             <button 
               @click="handleAddFavorite"
-              class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              class="px-4 py-2 bg-primary text-primary-foreground rounded hover:bg-primary/90"
             >
               ⭐ Ajouter aux favoris
             </button>
@@ -106,7 +106,7 @@ const handleAddFavorite = async () => {
               <span 
                 v-for="genre in movie.genre" 
                 :key="genre"
-                class="bg-gray-200 rounded px-3 py-1"
+                class="bg-muted rounded px-3 py-1"
               >
                 {{ genre }}
               </span>
@@ -120,7 +120,7 @@ const handleAddFavorite = async () => {
 
           <div class="mb-4">
             <h2 class="text-lg font-semibold mb-2">Synopsis</h2>
-            <p class="text-gray-700 leading-relaxed">{{ movie.synopsis }}</p>
+            <p class="text-foreground leading-relaxed">{{ movie.synopsis }}</p>
           </div>
 
           <div>
@@ -139,7 +139,7 @@ const handleAddFavorite = async () => {
         </h2>
 
         <!-- Formulaire d'ajout de commentaire -->
-        <div v-if="user" class="bg-gray-50 p-4 rounded-lg mb-6">
+        <div v-if="user" class="bg-muted p-4 rounded-lg mb-6">
           <h3 class="font-semibold mb-3">Ajouter un commentaire</h3>
           <div class="mb-3">
             <label class="block mb-2">Note : {{ newRating }}/10</label>
@@ -154,19 +154,19 @@ const handleAddFavorite = async () => {
           <textarea 
             v-model="newComment"
             placeholder="Votre commentaire..."
-            class="w-full p-2 border rounded mb-3"
+            class="w-full p-2 border border-input rounded mb-3"
             rows="4"
           ></textarea>
           <button 
             @click="submitComment"
             :disabled="isSubmitting || !newComment.trim()"
-            class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
+            class="px-4 py-2 bg-primary text-primary-foreground rounded hover:bg-primary/90 disabled:opacity-50"
           >
             {{ isSubmitting ? 'Envoi...' : 'Publier' }}
           </button>
         </div>
 
-        <p v-else class="text-gray-600 mb-6">
+        <p v-else class="text-muted-foreground mb-6">
           Connectez-vous pour laisser un commentaire
         </p>
 
@@ -175,21 +175,21 @@ const handleAddFavorite = async () => {
           <div 
             v-for="comment in comments" 
             :key="comment.id"
-            class="bg-white p-4 rounded-lg shadow"
+            class="bg-card p-4 rounded-lg shadow"
           >
             <div class="flex justify-between items-start mb-2">
               <div>
                 <span class="font-semibold">{{ comment.username }}</span>
-                <span class="text-sm text-gray-500 ml-2">
+                <span class="text-sm text-muted-foreground ml-2">
                   {{ new Date(comment.createdAt).toLocaleDateString('fr-FR') }}
                 </span>
               </div>
               <div class="flex items-center">
-                <span class="text-yellow-500">★</span>
+                <span class="text-accent">★</span>
                 <span class="ml-1 font-medium">{{ comment.rating }}/10</span>
               </div>
             </div>
-            <p class="text-gray-700">{{ comment.comment }}</p>
+            <p class="text-foreground">{{ comment.comment }}</p>
           </div>
         </div>
       </div>

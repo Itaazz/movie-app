@@ -55,8 +55,8 @@ const handleRemove = async (favoriteId: number) => {
     <h1 class="text-3xl font-bold mb-6">Mes favoris</h1>
 
     <div v-if="!favoritesWithMovies || favoritesWithMovies.length === 0" class="text-center py-10">
-      <p class="text-gray-600 text-lg mb-4">Vous n'avez pas encore de films favoris</p>
-      <NuxtLink to="/" class="text-blue-600 hover:underline">
+      <p class="text-muted-foreground text-lg mb-4">Vous n'avez pas encore de films favoris</p>
+      <NuxtLink to="/" class="text-primary hover:underline">
         Découvrir des films
       </NuxtLink>
     </div>
@@ -65,11 +65,11 @@ const handleRemove = async (favoriteId: number) => {
       <div 
         v-for="favorite in favoritesWithMovies" 
         :key="favorite.id"
-        class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow relative"
+        class="bg-card rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow relative"
       >
         <button
           @click="handleRemove(favorite.id)"
-          class="absolute top-2 right-2 bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-700 z-10"
+          class="absolute top-2 right-2 bg-destructive text-destructive-foreground rounded-full w-8 h-8 flex items-center justify-center hover:bg-destructive/80 z-10"
           title="Supprimer des favoris"
         >
           ✕
