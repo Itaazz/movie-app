@@ -5,7 +5,6 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event)
   const { movieId, userId, comment, rating } = body
 
-  // Validation
   if (!movieId || !userId || !comment) {
     throw createError({
       statusCode: 400,
@@ -20,7 +19,6 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  // Récupérer le nom d'utilisateur
   const users = await readJsonFile<User[]>('users.json')
   const user = users.find(u => u.id === userId)
 
@@ -33,7 +31,6 @@ export default defineEventHandler(async (event) => {
 
   const comments = await readJsonFile<Comment[]>('comments.json')
 
-  // Créer le nouveau commentaire
   const newComment: Comment = {
     id: generateId(comments),
     movieId,

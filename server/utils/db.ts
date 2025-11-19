@@ -1,9 +1,6 @@
-import fs from 'fs/promises'
+import { promises as fs } from 'fs'
 import path from 'path'
 
-/**
- * Lit les données d'un fichier JSON
- */
 export async function readJsonFile<T>(filename: string): Promise<T> {
   try {
     const filePath = path.join(process.cwd(), 'server', 'data', filename)
@@ -14,10 +11,6 @@ export async function readJsonFile<T>(filename: string): Promise<T> {
     return [] as T
   }
 }
-
-/**
- * Écrit des données dans un fichier JSON
- */
 export async function writeJsonFile<T>(filename: string, data: T): Promise<void> {
   try {
     const filePath = path.join(process.cwd(), 'server', 'data', filename)

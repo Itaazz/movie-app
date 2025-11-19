@@ -5,9 +5,11 @@ export interface Movie {
   director: string
   poster: string
   synopsis: string
-  actors: string[]
+  actors: Array<{ name: string; image: string }>
   rating: number
   genre: string[]
+  seen?: boolean
+  notesUser?: number | null
 }
 
 export interface User {

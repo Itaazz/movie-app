@@ -21,7 +21,6 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  // Supprimer le favori
   favorites.splice(favoriteIndex, 1)
   await writeJsonFile('favorites.json', favorites)
 

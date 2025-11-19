@@ -14,7 +14,6 @@ export default defineEventHandler(async (event) => {
 
   const favorites = await readJsonFile<Favorite[]>('favorites.json')
 
-  // Vérifier si le favori existe déjà
   const existingFavorite = favorites.find(
     f => f.userId === userId && f.movieId === movieId
   )
@@ -26,7 +25,6 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  // Ajouter le nouveau favori
   const newFavorite: Favorite = {
     id: generateId(favorites),
     userId,
