@@ -3,7 +3,7 @@ import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
 
 const props = defineProps({
   items: { type: Array as () => any[], default: () => [] },
-  showArrows: { type: Boolean, default: true }
+  showArrows: { type: Boolean, default: false }
 })
 
 const slidesPerView = ref(4)
@@ -23,23 +23,36 @@ function updateSlidesPerView() {
 onMounted(() => {
   updateSlidesPerView()
   window.addEventListener('resize', updateSlidesPerView)
+  setTimeout(() => {
+    if (track.value) {
+      track.value.addEventListener('scroll', updateFadeVisibility, { passive: true })
+      updateFadeVisibility()
+    }
+  }, 0)
 })
 
 onBeforeUnmount(() => {
   window.removeEventListener('resize', updateSlidesPerView)
+  if (track.value) track.value.removeEventListener('scroll', updateFadeVisibility)
 })
 
 const canShowArrows = computed(() => props.showArrows && (props.items?.length ?? 0) > slidesPerView.value)
 
-function prev() {
-  if (!track.value) return
-  track.value.scrollBy({ left: -track.value.clientWidth * 0.9, behavior: 'smooth' })
+const showFadeLeft = ref(false)
+const showFadeRight = ref(false)
+
+function updateFadeVisibility() {
+  if (!track.value) {
+    showFadeLeft.value = false
+    showFadeRight.value = false
+    return
+  }
+  const el = track.value
+  const maxScroll = el.scrollWidth - el.clientWidth
+  showFadeLeft.value = el.scrollLeft > 8
+  showFadeRight.value = el.scrollLeft < (maxScroll - 8)
 }
 
-function next() {
-  if (!track.value) return
-  track.value.scrollBy({ left: track.value.clientWidth * 0.9, behavior: 'smooth' })
-}
 
 function onPointerDown(e: PointerEvent) {
   if (!track.value) return
@@ -68,14 +81,9 @@ function onPointerUp(e: PointerEvent) {
 
 <template>
   <div class="relative">
-    <button
-      v-if="canShowArrows"
-      @click="prev"
-      class="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/60 text-white rounded-full p-2"
-      aria-label="Précédent"
-    >
-      ‹
-    </button>
+    <div v-show="(props.items?.length ?? 0) > slidesPerView && showFadeLeft" class="absolute left-0 top-0 bottom-0 w-14 pointer-events-none">
+      <div class="carousel-fade-left h-full w-full"></div>
+    </div>
 
     <div
       ref="track"
@@ -100,13 +108,24 @@ function onPointerUp(e: PointerEvent) {
       </div>
     </div>
 
-    <button
-      v-if="canShowArrows"
-      @click="next"
-      class="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/60 text-white rounded-full p-2"
-      aria-label="Suivant"
-    >
-      ›
-    </button>
+    <div v-show="(props.items?.length ?? 0) > slidesPerView && showFadeRight" class="absolute right-0 top-0 bottom-0 w-14 pointer-events-none">
+      <div class="carousel-fade-right h-full w-full"></div>
+    </div>
   </div>
 </template>
+
+<style scoped>
+.carousel-fade-left {
+  background: linear-gradient(to right, rgba(0,0,0,0.45), rgba(0,0,0,0));
+  transition: opacity 220ms ease;
+}
+.carousel-fade-right {
+  background: linear-gradient(to left, rgba(0,0,0,0.45), rgba(0,0,0,0));
+  transition: opacity 220ms ease;
+}
+
+.carousel-fade-left,
+.carousel-fade-right {
+  opacity: 1;
+}
+</style>
