@@ -31,7 +31,6 @@ function goSearch() {
         <span class="hidden sm:inline font-bold text-lg text-brand-yellow">MovieApp</span>
           </NuxtLink>
 
-          <!-- Navigation Links -->
           <div class="hidden md:flex items-center space-x-1">
             <NuxtLink to="/" :class="linkClass('/')">Accueil</NuxtLink>
             <NuxtLink to="/films" :class="linkClass('/films')">Films</NuxtLink>
@@ -51,7 +50,6 @@ function goSearch() {
           </form>
         </div>
 
-        <!-- Right side - Account -->
         <div class="flex items-center space-x-4">
           <UserMenu v-if="isAuthenticated" />
           

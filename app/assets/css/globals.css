@@ -109,20 +109,18 @@
 .text-brand-yellow { color: var(--brand-yellow) !important; }
 .brand-backdrop { backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
 
-/* small helpers for cards/header */
 .brand-ring:focus { outline: 2px solid var(--brand-yellow); }
 
-/* Navigation link tokens and helpers */
 .nav-link { color: var(--nav-link); transition: color .15s ease, background-color .15s ease; }
 .nav-link:hover { color: var(--nav-link-active); }
 .nav-link.active { color: var(--nav-link-active); }
 
 .scrollbar-none {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
 }
 .scrollbar-none::-webkit-scrollbar {
-  display: none; /* WebKit */
+  display: none; 
 }
 
 

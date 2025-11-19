@@ -6,9 +6,7 @@ const isVideoLoaded = ref(false)
 
 <template>
   <section class="relative w-full overflow-hidden bg-background">
-    <!-- Video Background -->
     <div class="relative w-full h-[500px] sm:h-[600px] md:h-[700px] overflow-hidden group">
-      <!-- Video -->
       <video
         autoplay
         muted
@@ -21,7 +19,6 @@ const isVideoLoaded = ref(false)
           src="https://media.istockphoto.com/id/1486020896/video/cinema-movie-theatre-interior-reel-cinema-background.mp4?s=mp4-640x640-is&sd=true" 
           type="video/mp4"
         />
-        <!-- Fallback image -->
         <img 
           src="https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?w=1200&h=700&fit=crop" 
           alt="Cinema" 
@@ -29,16 +26,13 @@ const isVideoLoaded = ref(false)
         />
       </video>
 
-      <!-- Dark overlay -->
       <div class="absolute inset-0 bg-gradient-to-r from-background/80 via-background/50 to-transparent"></div>
 
-      <!-- Loading skeleton -->
       <div 
         v-if="!isVideoLoaded"
         class="absolute inset-0 bg-muted animate-pulse"
       ></div>
 
-      <!-- Content -->
       <div class="absolute inset-0 flex flex-col justify-center px-6 sm:px-12 lg:px-20">
         <div class="max-w-2xl">
           <div class="inline-block mb-4 px-3 py-1 bg-primary text-primary-foreground text-xs font-semibold rounded-full">
@@ -53,7 +47,6 @@ const isVideoLoaded = ref(false)
             Explorez notre sélection exclusive de films en avant-première. Trouvez votre prochain film préféré.
           </p>
 
-          <!-- Buttons -->
           <div class="flex flex-col sm:flex-row gap-4">
             <NuxtLink 
               to="/"
@@ -72,7 +65,6 @@ const isVideoLoaded = ref(false)
         </div>
       </div>
 
-      <!-- Scroll indicator -->
       <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-foreground animate-bounce">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
