@@ -18,7 +18,6 @@ const handleClickOutside = () => {
 
 <template>
   <div class="relative">
-    <!-- User Button -->
     <button
       @click="isOpen = !isOpen"
       v-if="isAuthenticated"

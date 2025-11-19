@@ -16,5 +16,14 @@
     "comment": "L'un des meilleurs films que j'ai jamais vus. L'histoire est si puissante et émouvante.",
     "rating": 10,
     "createdAt": "2025-01-19T11:30:00Z"
+  },
+  {
+    "id": 3,
+    "movieId": 6,
+    "userId": 1,
+    "username": "demo",
+    "comment": "azeaz",
+    "rating": 5,
+    "createdAt": "2025-11-19T11:02:16.615Z"
   }
 ]

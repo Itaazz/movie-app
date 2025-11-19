@@ -6,9 +6,32 @@
     "director": "Christopher Nolan",
     "poster": "https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg",
     "synopsis": "Dom Cobb est un voleur expérimenté – le meilleur qui soit dans l'art périlleux de l'extraction : sa spécialité consiste à s'approprier les secrets les plus précieux d'un individu, enfouis au plus profond de son subconscient, pendant qu'il rêve et que son esprit est particulièrement vulnérable.",
-    "actors": ["Leonardo DiCaprio", "Marion Cotillard", "Tom Hardy", "Elliot Page"],
+    "actors": [
+      {
+        "name": "Leonardo DiCaprio",
+        "image": "https://ui-avatars.com/api/?name=Leonardo+DiCaprio&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "Marion Cotillard",
+        "image": "https://ui-avatars.com/api/?name=Marion+Cotillard&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "Tom Hardy",
+        "image": "https://ui-avatars.com/api/?name=Tom+Hardy&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "Elliot Page",
+        "image": "https://ui-avatars.com/api/?name=Elliot+Page&background=0D8ABC&color=fff"
+      }
+    ],
     "rating": 8.8,
-    "genre": ["Action", "Science-Fiction", "Thriller"]
+    "genre": [
+      "Action",
+      "Science-Fiction",
+      "Thriller"
+    ],
+    "seen": true,
+    "notesUser": 2
   },
   {
     "id": 2,
@@ -17,9 +40,32 @@
     "director": "Christopher Nolan",
     "poster": "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
     "synopsis": "Dans ce nouveau volet de la saga Batman, le chevalier noir va devoir faire face à l'une de ses plus grandes épreuves : affronter le Joker, un criminel anarchique qui cherche à plonger Gotham dans le chaos.",
-    "actors": ["Christian Bale", "Heath Ledger", "Aaron Eckhart", "Michael Caine"],
-    "rating": 9.0,
-    "genre": ["Action", "Crime", "Drame"]
+    "actors": [
+      {
+        "name": "Christian Bale",
+        "image": "https://ui-avatars.com/api/?name=Christian+Bale&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "Heath Ledger",
+        "image": "https://ui-avatars.com/api/?name=Heath+Ledger&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "Aaron Eckhart",
+        "image": "https://ui-avatars.com/api/?name=Aaron+Eckhart&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "Michael Caine",
+        "image": "https://ui-avatars.com/api/?name=Michael+Caine&background=0D8ABC&color=fff"
+      }
+    ],
+    "rating": 9,
+    "genre": [
+      "Action",
+      "Crime",
+      "Drame"
+    ],
+    "seen": true,
+    "notesUser": 1
   },
   {
     "id": 3,
@@ -28,9 +74,32 @@
     "director": "Christopher Nolan",
     "poster": "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
     "synopsis": "Dans un futur proche, face à une Terre exsangue, un groupe d'explorateurs utilise un vaisseau interstellaire pour franchir un trou de ver permettant de parcourir des distances jusque-là infranchissables afin de trouver un nouveau foyer pour l'humanité.",
-    "actors": ["Matthew McConaughey", "Anne Hathaway", "Jessica Chastain", "Michael Caine"],
+    "actors": [
+      {
+        "name": "Matthew McConaughey",
+        "image": "https://ui-avatars.com/api/?name=Matthew+McConaughey&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "Anne Hathaway",
+        "image": "https://ui-avatars.com/api/?name=Anne+Hathaway&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "Jessica Chastain",
+        "image": "https://ui-avatars.com/api/?name=Jessica+Chastain&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "Michael Caine",
+        "image": "https://ui-avatars.com/api/?name=Michael+Caine&background=0D8ABC&color=fff"
+      }
+    ],
     "rating": 8.6,
-    "genre": ["Aventure", "Drame", "Science-Fiction"]
+    "genre": [
+      "Aventure",
+      "Drame",
+      "Science-Fiction"
+    ],
+    "seen": false,
+    "notesUser": null
   },
   {
     "id": 4,
@@ -39,9 +108,30 @@
     "director": "Frank Darabont",
     "poster": "https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",
     "synopsis": "En 1947, Andy Dufresne, un jeune banquier, est condamné à la prison à vie pour le meurtre de sa femme et de son amant. Ayant beau clamer son innocence, il est emprisonné à Shawshank, le pénitencier le plus sévère de l'État du Maine.",
-    "actors": ["Tim Robbins", "Morgan Freeman", "Bob Gunton", "William Sadler"],
+    "actors": [
+      {
+        "name": "Tim Robbins",
+        "image": "https://ui-avatars.com/api/?name=Tim+Robbins&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "Morgan Freeman",
+        "image": "https://ui-avatars.com/api/?name=Morgan+Freeman&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "Bob Gunton",
+        "image": "https://ui-avatars.com/api/?name=Bob+Gunton&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "William Sadler",
+        "image": "https://ui-avatars.com/api/?name=William+Sadler&background=0D8ABC&color=fff"
+      }
+    ],
     "rating": 9.3,
-    "genre": ["Drame"]
+    "genre": [
+      "Drame"
+    ],
+    "seen": false,
+    "notesUser": null
   },
   {
     "id": 5,
@@ -50,9 +140,31 @@
     "director": "Quentin Tarantino",
     "poster": "https://image.tmdb.org/t/p/w500/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg",
     "synopsis": "L'histoire de truands dans la pègre de Los Angeles. Plusieurs histoires se mêlent : celle de deux tueurs à gages, celle d'un boxeur et celle d'un couple de braqueurs.",
-    "actors": ["John Travolta", "Uma Thurman", "Samuel L. Jackson", "Bruce Willis"],
+    "actors": [
+      {
+        "name": "John Travolta",
+        "image": "https://ui-avatars.com/api/?name=John+Travolta&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "Uma Thurman",
+        "image": "https://ui-avatars.com/api/?name=Uma+Thurman&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "Samuel L. Jackson",
+        "image": "https://ui-avatars.com/api/?name=Samuel+L.+Jackson&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "Bruce Willis",
+        "image": "https://ui-avatars.com/api/?name=Bruce+Willis&background=0D8ABC&color=fff"
+      }
+    ],
     "rating": 8.9,
-    "genre": ["Crime", "Thriller"]
+    "genre": [
+      "Crime",
+      "Thriller"
+    ],
+    "seen": false,
+    "notesUser": null
   },
   {
     "id": 6,
@@ -61,9 +173,31 @@
     "director": "Robert Zemeckis",
     "poster": "https://image.tmdb.org/t/p/w500/saHP97rTPS5eLmrLQEcANmKrsFl.jpg",
     "synopsis": "Quelques décennies d'histoire américaine, de la fin des années 1950 jusqu'au milieu des années 1980, vues à travers le regard de Forrest Gump, un simple d'esprit qui, sans le vouloir, influence nombre d'événements.",
-    "actors": ["Tom Hanks", "Robin Wright", "Gary Sinise", "Sally Field"],
+    "actors": [
+      {
+        "name": "Tom Hanks",
+        "image": "https://ui-avatars.com/api/?name=Tom+Hanks&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "Robin Wright",
+        "image": "https://ui-avatars.com/api/?name=Robin+Wright&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "Gary Sinise",
+        "image": "https://ui-avatars.com/api/?name=Gary+Sinise&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "Sally Field",
+        "image": "https://ui-avatars.com/api/?name=Sally+Field&background=0D8ABC&color=fff"
+      }
+    ],
     "rating": 8.8,
-    "genre": ["Drame", "Romance"]
+    "genre": [
+      "Drame",
+      "Romance"
+    ],
+    "seen": false,
+    "notesUser": null
   },
   {
     "id": 7,
@@ -72,9 +206,31 @@
     "director": "Lana Wachowski, Lilly Wachowski",
     "poster": "https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg",
     "synopsis": "Un pirate informatique apprend de mystérieux rebelles la vraie nature de sa réalité et son rôle dans la guerre contre ses contrôleurs.",
-    "actors": ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss", "Hugo Weaving"],
+    "actors": [
+      {
+        "name": "Keanu Reeves",
+        "image": "https://ui-avatars.com/api/?name=Keanu+Reeves&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "Laurence Fishburne",
+        "image": "https://ui-avatars.com/api/?name=Laurence+Fishburne&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "Carrie-Anne Moss",
+        "image": "https://ui-avatars.com/api/?name=Carrie-Anne+Moss&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "Hugo Weaving",
+        "image": "https://ui-avatars.com/api/?name=Hugo+Weaving&background=0D8ABC&color=fff"
+      }
+    ],
     "rating": 8.7,
-    "genre": ["Action", "Science-Fiction"]
+    "genre": [
+      "Action",
+      "Science-Fiction"
+    ],
+    "seen": false,
+    "notesUser": null
   },
   {
     "id": 8,
@@ -83,9 +239,32 @@
     "director": "Ridley Scott",
     "poster": "https://image.tmdb.org/t/p/w500/ty8TGRuvJLPUmAR1H1nRIsgwvim.jpg",
     "synopsis": "Le général romain Maximus est le plus fidèle soutien de l'empereur Marc Aurèle, qu'il a conduit de victoire en victoire. Mais le fils de Marc Aurèle, Commode, est jaloux de Maximus et fait assassiner son père pour prendre le pouvoir.",
-    "actors": ["Russell Crowe", "Joaquin Phoenix", "Connie Nielsen", "Oliver Reed"],
+    "actors": [
+      {
+        "name": "Russell Crowe",
+        "image": "https://ui-avatars.com/api/?name=Russell+Crowe&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "Joaquin Phoenix",
+        "image": "https://ui-avatars.com/api/?name=Joaquin+Phoenix&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "Connie Nielsen",
+        "image": "https://ui-avatars.com/api/?name=Connie+Nielsen&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "Oliver Reed",
+        "image": "https://ui-avatars.com/api/?name=Oliver+Reed&background=0D8ABC&color=fff"
+      }
+    ],
     "rating": 8.5,
-    "genre": ["Action", "Aventure", "Drame"]
+    "genre": [
+      "Action",
+      "Aventure",
+      "Drame"
+    ],
+    "seen": false,
+    "notesUser": null
   },
   {
     "id": 9,
@@ -94,9 +273,31 @@
     "director": "Peter Jackson",
     "poster": "https://image.tmdb.org/t/p/w500/rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg",
     "synopsis": "Les armées de Sauron ont attaqué Minas Tirith, la capitale de Gondor. Jamais ce royaume n'a eu autant besoin de son roi. Mais Aragorn trouvera-t-il en lui la volonté d'accomplir sa destinée ?",
-    "actors": ["Elijah Wood", "Ian McKellen", "Viggo Mortensen", "Orlando Bloom"],
+    "actors": [
+      {
+        "name": "Elijah Wood",
+        "image": "https://ui-avatars.com/api/?name=Elijah+Wood&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "Ian McKellen",
+        "image": "https://ui-avatars.com/api/?name=Ian+McKellen&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "Viggo Mortensen",
+        "image": "https://ui-avatars.com/api/?name=Viggo+Mortensen&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "Orlando Bloom",
+        "image": "https://ui-avatars.com/api/?name=Orlando+Bloom&background=0D8ABC&color=fff"
+      }
+    ],
     "rating": 8.9,
-    "genre": ["Aventure", "Fantaisie"]
+    "genre": [
+      "Aventure",
+      "Fantaisie"
+    ],
+    "seen": false,
+    "notesUser": null
   },
   {
     "id": 10,
@@ -105,8 +306,29 @@
     "director": "David Fincher",
     "poster": "https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg",
     "synopsis": "Un employé de bureau déprimé souffrant d'insomnie rencontre un vendeur de savon charismatique et ils forment un club de combat underground qui devient bien plus.",
-    "actors": ["Brad Pitt", "Edward Norton", "Helena Bonham Carter", "Meat Loaf"],
+    "actors": [
+      {
+        "name": "Brad Pitt",
+        "image": "https://ui-avatars.com/api/?name=Brad+Pitt&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "Edward Norton",
+        "image": "https://ui-avatars.com/api/?name=Edward+Norton&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "Helena Bonham Carter",
+        "image": "https://ui-avatars.com/api/?name=Helena+Bonham+Carter&background=0D8ABC&color=fff"
+      },
+      {
+        "name": "Meat Loaf",
+        "image": "https://ui-avatars.com/api/?name=Meat+Loaf&background=0D8ABC&color=fff"
+      }
+    ],
     "rating": 8.8,
-    "genre": ["Drame"]
+    "genre": [
+      "Drame"
+    ],
+    "seen": false,
+    "notesUser": null
   }
 ]

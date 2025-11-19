@@ -4,12 +4,10 @@ const { getFavorites, removeFavorite } = useFavorites()
 const { getMovie } = useMovies()
 const router = useRouter()
 
-// Rediriger si non connecté
 if (!isAuthenticated.value) {
   router.push('/auth')
 }
 
-// Charger les favoris
 const { data: favorites, refresh: refreshFavorites } = await useAsyncData(
   'my-favorites',
   async () => {
@@ -18,7 +16,6 @@ const { data: favorites, refresh: refreshFavorites } = await useAsyncData(
   }
 )
 
-// Charger les détails des films favoris
 const { data: favoritesWithMovies } = await useAsyncData(
   'favorites-movies',
   async () => {

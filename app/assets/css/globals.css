@@ -2,6 +2,12 @@
 
 @layer base {
   :root {
+  --brand-gray: #333333; 
+  --brand-gray-dark: #111111;
+  --brand-yellow: #FFD52A;
+  --nav-link: #999999;
+  --nav-link-active: #F2F2F2; 
+
     --background: oklch(0.3211 0 0);
     --foreground: oklch(1.0000 0 0);
     --card: oklch(0.4386 0 0);
@@ -42,6 +48,11 @@
   }
 
   .dark {
+  /* dark mode overrides for brand */
+  --brand-gray: #111111;
+  --brand-gray-dark: #000000;
+  --brand-yellow: #FFD52A;
+
     --background: oklch(0.1450 0 0);
     --foreground: oklch(0.9850 0 0);
     --card: oklch(0.2050 0 0);
@@ -90,3 +101,26 @@
     color: oklch(var(--foreground));
   }
 }
+
+/* Reusable design system utility classes */
+.bg-brand-gray { background-color: var(--brand-gray) !important; }
+.dark .bg-brand-gray { background-color: var(--brand-gray-dark) !important; }
+.bg-brand-gray-60 { background-color: rgba(51,51,51,0.6) !important; }
+.text-brand-yellow { color: var(--brand-yellow) !important; }
+.brand-backdrop { backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+
+.brand-ring:focus { outline: 2px solid var(--brand-yellow); }
+
+.nav-link { color: var(--nav-link); transition: color .15s ease, background-color .15s ease; }
+.nav-link:hover { color: var(--nav-link-active); }
+.nav-link.active { color: var(--nav-link-active); }
+
+.scrollbar-none {
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none; 
+}
+
+

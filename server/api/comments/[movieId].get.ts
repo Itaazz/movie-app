@@ -14,7 +14,6 @@ export default defineEventHandler(async (event) => {
   const comments = await readJsonFile<Comment[]>('comments.json')
   const movieComments = comments.filter(c => c.movieId === movieId)
 
-  // Trier par date décroissante (plus récent en premier)
   movieComments.sort((a, b) => 
     new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   )

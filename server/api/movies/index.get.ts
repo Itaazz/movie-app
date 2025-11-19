@@ -8,10 +8,8 @@ export default defineEventHandler(async (event) => {
   const limit = parseInt(query.limit as string) || 10
   const genre = query.genre as string
 
-  // Lire tous les films
   const movies = await readJsonFile<Movie[]>('movies.json')
 
-  // Filtrer par recherche (titre ou réalisateur)
   let filteredMovies = movies.filter(movie => {
     const matchesSearch = movie.title.toLowerCase().includes(search) || 
                          movie.director.toLowerCase().includes(search)
@@ -19,7 +17,6 @@ export default defineEventHandler(async (event) => {
     return matchesSearch && matchesGenre
   })
 
-  // Pagination
   const startIndex = (page - 1) * limit
   const endIndex = startIndex + limit
   const paginatedMovies = filteredMovies.slice(startIndex, endIndex)
