@@ -31,7 +31,7 @@
       "Thriller"
     ],
     "seen": true,
-    "notesUser": 2
+    "notesUser": 3
   },
   {
     "id": 2,
@@ -65,7 +65,7 @@
       "Drame"
     ],
     "seen": true,
-    "notesUser": 3
+    "notesUser": 4
   },
   {
     "id": 3,
@@ -263,8 +263,8 @@
       "Aventure",
       "Drame"
     ],
-    "seen": false,
-    "notesUser": null
+    "seen": true,
+    "notesUser": 5
   },
   {
     "id": 9,

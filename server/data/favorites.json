@@ -10,5 +10,17 @@
     "userId": 1,
     "movieId": 4,
     "createdAt": "2025-11-19T15:32:36.513Z"
+  },
+  {
+    "id": 5,
+    "userId": 1,
+    "movieId": 8,
+    "createdAt": "2025-11-19T15:34:36.362Z"
+  },
+  {
+    "id": 6,
+    "userId": 1,
+    "movieId": 1,
+    "createdAt": "2025-11-19T15:36:30.147Z"
   }
 ]

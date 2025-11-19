@@ -61,10 +61,8 @@ async function loadFavorites() {
   }
 }
 
-// load favorites when user changes
 watch(() => user.value?.id, () => loadFavorites(), { immediate: true })
 
-// listen to favorites-updated events from other components to keep favoriteIds in sync
 onMounted(() => {
   const onFavUpdated = (e: any) => {
     try {
@@ -76,7 +74,7 @@ onMounted(() => {
       } else {
         favoriteIds.value = favoriteIds.value.filter(id => id !== movieId)
       }
-    } catch (err) { /* ignore */ }
+    } catch (err) { }
   }
   window.addEventListener('favorites-updated', onFavUpdated)
   onBeforeUnmount(() => window.removeEventListener('favorites-updated', onFavUpdated))
