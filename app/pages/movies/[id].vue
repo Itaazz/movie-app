@@ -3,6 +3,8 @@ const route = useRoute()
 const router = useRouter()
 const { getMovie } = useMovies()
 import CommentsSection from '../../components/CommentsSection.vue'
+import ActorCard from '../../components/ActorCard.vue'
+import StarRating from '../../components/StarRating.vue'
 const { user } = useAuth()
 const { addFavorite } = useFavorites()
 
@@ -12,6 +14,34 @@ const { data: movie, error: movieError } = await useAsyncData(
   `movie-${movieId}`,
   () => getMovie(movieId)
 )
+
+import { ref } from 'vue'
+
+const userRating = ref<number | null>(movie.value?.notesUser ?? null)
+
+const toast = ref<string | null>(null)
+
+function showToast (msg: string, ms = 2500) {
+  toast.value = msg
+  setTimeout(() => { toast.value = null }, ms)
+}
+
+async function setRating (value: number) {
+  try {
+    const res = await $fetch(`/api/movies/${movieId}`, {
+      method: 'PUT',
+      body: { notesUser: value }
+    })
+    if (res && res.movie) {
+      movie.value = res.movie
+      userRating.value = res.movie.notesUser ?? null
+      showToast('Ta note a bien été enregistrée ✅')
+    }
+  } catch (err) {
+    console.error('Erreur lors de l\'envoi de la note :', err)
+    alert('Impossible d\'enregistrer votre note pour le moment.')
+  }
+}
 
 
 
@@ -40,6 +70,9 @@ function handleBack() {
 
 <template>
   <div class="container mx-auto p-6">
+    <transition name="fade">
+      <div v-if="toast" class="fixed right-6 bottom-6 z-50 bg-black/85 text-white px-4 py-2 rounded shadow-md">{{ toast }}</div>
+    </transition>
     <button @click="handleBack" class="text-primary hover:underline mb-4 inline-block">
       ← Retour à la liste
     </button>
@@ -65,7 +98,11 @@ function handleBack() {
               <span class="text-accent text-2xl">★</span>
               <span class="ml-1 text-xl font-medium">{{ movie.rating }}/10</span>
             </div>
-            
+            <div class="ml-4 flex items-center gap-4">
+              <div class="text-sm text-muted-foreground">Votre note :</div>
+              <StarRating v-model:modelValue="userRating" @rated="setRating" />
+            </div>
+
             <button 
               @click="handleAddFavorite"
               class="px-4 py-2 bg-primary text-primary-foreground rounded hover:bg-primary/90"
@@ -99,9 +136,9 @@ function handleBack() {
 
           <div>
             <h2 class="text-lg font-semibold mb-2">Acteurs</h2>
-            <ul class="list-disc list-inside">
-              <li v-for="actor in movie.actors" :key="actor">{{ actor }}</li>
-            </ul>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <ActorCard v-for="actor in movie.actors" :key="actor.name" :actor="actor" />
+            </div>
           </div>
         </div>
       </div>

@@ -30,8 +30,8 @@
       "Science-Fiction",
       "Thriller"
     ],
-    "seen": false,
-    "notesUser": null
+    "seen": true,
+    "notesUser": 2
   },
   {
     "id": 2,
@@ -65,7 +65,7 @@
       "Drame"
     ],
     "seen": true,
-    "notesUser": null
+    "notesUser": 1
   },
   {
     "id": 3,

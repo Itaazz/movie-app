@@ -13,21 +13,16 @@ const { searchMovies } = useMovies()
 
 const { data, pending, error, refresh } = await useAsyncData<any>(() => searchMovies({ search: search.value, genre: genre.value, page: page.value, limit: limit.value }))
 
-// Refresh when search/genre/page changes
 watch([search, genre, page], () => {
-  // reset to first page when search or genre changes
   if (page.value !== 1 && (search.value || genre.value)) page.value = 1
   refresh()
 })
 
 const movies = computed(() => ((data.value as any)?.movies ?? []))
 
+const { data: genresData } = await useAsyncData('genres', () => $fetch('/api/genres'))
 const availableGenres = computed<string[]>(() => {
-  const arr: string[] = [];
-  ((data.value as any)?.movies || []).forEach((m: any) => {
-    if (Array.isArray(m.genre)) m.genre.forEach((g: string) => arr.push(g))
-  })
-  return Array.from(new Set(arr))
+  return ((genresData?.value as { genres?: string[] })?.genres) || []
 })
 
 const sorted = computed(() => {
