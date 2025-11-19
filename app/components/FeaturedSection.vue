@@ -15,7 +15,7 @@ const filters = [
 
 const { searchMovies } = useMovies()
 
-const { data: moviesData, refresh } = await useAsyncData(
+const { data: moviesData } = await useAsyncData(
   () => `movies-${activeFilter.value}`,
   async () => {
     const genre = filters.find(f => f.id === activeFilter.value)?.genre
@@ -29,10 +29,6 @@ const { data: moviesData, refresh } = await useAsyncData(
 )
 
 const moviesList = computed(() => (((moviesData as any)?.value?.movies) || []))
-
-const handleFilterChange = (filterId: string) => {
-  activeFilter.value = filterId as 'all' | 'action' | 'drama' | 'scifi'
-}
 </script>
 
 <template>
@@ -40,23 +36,7 @@ const handleFilterChange = (filterId: string) => {
     <div class="container mx-auto">
       <div class="mb-12">
         <h2 class="text-4xl font-bold mb-2">À l'affiche</h2>
-        <p class="text-muted-foreground text-lg">Découvrez nos films actuellement en avant-première</p>
-      </div>
-
-      <div class="flex flex-wrap gap-3 mb-12">
-        <button
-          v-for="filter in filters"
-          :key="filter.id"
-          @click="handleFilterChange(filter.id)"
-          :class="[
-            'px-4 py-2 rounded-full font-medium transition-all duration-200',
-            activeFilter === filter.id
-              ? 'bg-primary text-primary-foreground shadow-lg'
-              : 'bg-secondary text-secondary-foreground hover:bg-accent hover:text-accent-foreground'
-          ]"
-        >
-          {{ filter.label }}
-        </button>
+        <p class="text-muted-foreground text-lg">Découvrez les films actuellement au cinéma</p>
       </div>
 
       <div v-if="moviesList.length" class="relative">

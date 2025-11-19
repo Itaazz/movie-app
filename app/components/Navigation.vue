@@ -34,22 +34,8 @@ function goSearch() {
           <div class="hidden md:flex items-center space-x-1">
             <NuxtLink to="/" :class="linkClass('/')">Accueil</NuxtLink>
             <NuxtLink to="/films" :class="linkClass('/films')">Films</NuxtLink>
-            <NuxtLink to="/#featured" :class="linkClass('/#featured')">À l'affiche</NuxtLink>
           </div>
         </div>
-
-        <div class="hidden sm:flex flex-1 justify-center px-4">
-          <form @submit.prevent="goSearch" class="w-full max-w-xl">
-            <input
-              v-model="q"
-              type="search"
-              placeholder="Rechercher un film, un réalisateur..."
-              aria-label="Search movies"
-              class="w-full rounded-full py-2 px-4 bg-muted/10 text-sm text-card-foreground placeholder:text-muted-foreground border border-transparent focus:outline-none focus:ring-2 focus:ring-accent"
-            />
-          </form>
-        </div>
-
         <div class="flex items-center space-x-4">
           <UserMenu v-if="isAuthenticated" />
           
