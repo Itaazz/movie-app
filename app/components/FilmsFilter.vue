@@ -14,30 +14,81 @@
           <option value="best_user">Meilleures notes (Mes notes)</option>
           <option value="worst_user">Pires notes (Mes notes)</option>
         </select>
+
+        <label class="flex items-center gap-2 text-sm ml-3">
+          <input type="checkbox" v-model="onlyFavorites" :disabled="!isAuthenticated" class="w-4 h-4" />
+          <span class="text-gray-700">Favoris</span>
+        </label>
       </div>
 
       <div class="text-sm text-gray-600">{{ sortedMovies.length }} film(s)</div>
     </div>
 
-    <slot :sorted="sortedMovies" :sortKey="sortKey" />
+    <slot :sorted="sortedMovies" :sortKey="sortKey" :onlyFavorites="onlyFavorites" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useAuth } from '~/composables/useAuth'
+import { useFavorites } from '~/composables/useFavorites'
 
 const props = defineProps<{ movies?: Array<any> }>()
 
 const route = useRoute()
 const router = useRouter()
+const { user, isAuthenticated } = useAuth()
+const { getFavorites } = useFavorites()
 
 const sortKey = ref((route.query.sort as string) || 'recent')
+const onlyFavorites = ref(false)
 
 const movies = computed(() => (props.movies || []) as any[])
 
+const favoriteIds = ref<number[]>([])
+
+async function loadFavorites() {
+  if (!isAuthenticated.value || !user.value) {
+    favoriteIds.value = []
+    return
+  }
+  try {
+    const favs = await getFavorites(user.value.id)
+    favoriteIds.value = favs.map(f => f.movieId)
+  } catch (err) {
+    favoriteIds.value = []
+  }
+}
+
+// load favorites when user changes
+watch(() => user.value?.id, () => loadFavorites(), { immediate: true })
+
+// listen to favorites-updated events from other components to keep favoriteIds in sync
+onMounted(() => {
+  const onFavUpdated = (e: any) => {
+    try {
+      const detail = e.detail || {}
+      const { movieId, added } = detail
+      if (typeof movieId === 'undefined') return
+      if (added) {
+        if (!favoriteIds.value.includes(movieId)) favoriteIds.value.push(movieId)
+      } else {
+        favoriteIds.value = favoriteIds.value.filter(id => id !== movieId)
+      }
+    } catch (err) { /* ignore */ }
+  }
+  window.addEventListener('favorites-updated', onFavUpdated)
+  onBeforeUnmount(() => window.removeEventListener('favorites-updated', onFavUpdated))
+})
+
 const sortedMovies = computed(() => {
-  const list = [...(movies.value || [])]
+  let list = [...(movies.value || [])]
+
+  if (onlyFavorites.value) {
+    list = list.filter(m => favoriteIds.value.includes(m.id))
+  }
+
   switch (sortKey.value) {
     case 'year_asc':
       return list.sort((a, b) => (a.year || 0) - (b.year || 0))
