@@ -15,11 +15,6 @@ function linkClass(path: string) {
     active ? 'active' : ''
   ]
 }
-
-function goSearch() {
-  if (!q.value) return
-  router.push({ path: '/search', query: { q: q.value } })
-}
 </script>
 
 <template>
@@ -31,9 +26,10 @@ function goSearch() {
         <span class="hidden sm:inline font-bold text-lg text-brand-yellow">MovieApp</span>
           </NuxtLink>
 
-          <div class="hidden md:flex items-center space-x-1">
+            <div class="hidden md:flex items-center space-x-1">
             <NuxtLink to="/" :class="linkClass('/')">Accueil</NuxtLink>
             <NuxtLink to="/films" :class="linkClass('/films')">Films</NuxtLink>
+            <NuxtLink to="/mes-films" :class="linkClass('/mes-films')">Mes films</NuxtLink>
           </div>
         </div>
         <div class="flex items-center space-x-4">

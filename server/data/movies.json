@@ -65,7 +65,7 @@
       "Drame"
     ],
     "seen": true,
-    "notesUser": 1
+    "notesUser": 3
   },
   {
     "id": 3,
@@ -98,8 +98,8 @@
       "Drame",
       "Science-Fiction"
     ],
-    "seen": false,
-    "notesUser": null
+    "seen": true,
+    "notesUser": 3
   },
   {
     "id": 4,
@@ -130,8 +130,8 @@
     "genre": [
       "Drame"
     ],
-    "seen": false,
-    "notesUser": null
+    "seen": true,
+    "notesUser": 5
   },
   {
     "id": 5,
