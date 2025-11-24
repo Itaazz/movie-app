@@ -9,7 +9,6 @@ const { data: moviesData, pending, error } = await useAsyncData(
 
 <template>
   <div>
-    <HeroSection />
 
     <FeaturedSection />
 

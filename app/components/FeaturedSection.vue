@@ -36,7 +36,6 @@ const moviesList = computed(() => (((moviesData as any)?.value?.movies) || []))
     <div class="container mx-auto">
       <div class="mb-12">
         <h2 class="text-4xl font-bold mb-2">À l'affiche</h2>
-        <p class="text-muted-foreground text-lg">Découvrez les films actuellement au cinéma</p>
       </div>
 
       <div v-if="moviesList.length" class="relative">

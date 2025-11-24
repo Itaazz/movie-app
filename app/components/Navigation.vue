@@ -18,7 +18,7 @@ function linkClass(path: string) {
 </script>
 
 <template>
-  <nav class="sticky top-0 z-50 w-full border-b bg-brand-gray brand-backdrop">
+  <nav class="sticky top-0 z-50 w-full bg-brand-gray brand-backdrop shadow-sm">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 items-center justify-between">
         <div class="flex items-center space-x-8">

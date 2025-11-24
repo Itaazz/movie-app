@@ -2,8 +2,8 @@
   <div>
     <div class="mb-4 flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <label for="sort" class="text-sm text-gray-700">Trier :</label>
-        <select id="sort" v-model="sortKey" class="rounded border px-2 py-1 text-sm">
+        <label for="sort" class="text-sm text-white">Trier :</label>
+        <select id="sort" v-model="sortKey" class="rounded-md px-3 h-10 border border-white/30 bg-transparent text-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-white/20">
           <option value="recent">Récemment ajoutés</option>
           <option value="oldest">Les plus anciens</option>
           <option value="year_desc">Année (décroissant)</option>
@@ -17,11 +17,11 @@
 
         <label class="flex items-center gap-2 text-sm ml-3">
           <input type="checkbox" v-model="onlyFavorites" :disabled="!isAuthenticated" class="w-4 h-4" />
-          <span class="text-gray-700">Favoris</span>
+          <span class="text-white">Favoris</span>
         </label>
       </div>
 
-      <div class="text-sm text-gray-600">{{ sortedMovies.length }} film(s)</div>
+      <div class="text-sm text-white">{{ sortedMovies.length }} film(s)</div>
     </div>
 
     <slot :sorted="sortedMovies" :sortKey="sortKey" :onlyFavorites="onlyFavorites" />

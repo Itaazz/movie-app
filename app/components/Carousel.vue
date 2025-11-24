@@ -81,9 +81,9 @@ function onPointerUp(e: PointerEvent) {
 
 <template>
   <div class="relative">
-    <div v-show="(props.items?.length ?? 0) > slidesPerView && showFadeLeft" class="absolute left-0 top-0 bottom-0 w-14 pointer-events-none">
-      <div class="carousel-fade-left h-full w-full"></div>
-    </div>
+  <div v-show="(props.items?.length ?? 0) > slidesPerView && showFadeLeft" class="absolute left-0 top-2 bottom-2 w-16 pointer-events-none z-50">
+    <div class="carousel-fade-left h-full w-full pointer-events-none"></div>
+  </div>
 
     <div
       ref="track"
@@ -108,20 +108,20 @@ function onPointerUp(e: PointerEvent) {
       </div>
     </div>
 
-    <div v-show="(props.items?.length ?? 0) > slidesPerView && showFadeRight" class="absolute right-0 top-0 bottom-0 w-14 pointer-events-none">
-      <div class="carousel-fade-right h-full w-full"></div>
-    </div>
+  <div v-show="(props.items?.length ?? 0) > slidesPerView && showFadeRight" class="absolute right-0 top-2 bottom-2 w-16 pointer-events-none z-50">
+    <div class="carousel-fade-right h-full w-full pointer-events-none"></div>
+  </div>
   </div>
 </template>
 
 <style scoped>
 .carousel-fade-left {
-  background: linear-gradient(to right, rgba(0,0,0,0.45), rgba(0,0,0,0));
-  transition: opacity 220ms ease;
+  background: linear-gradient(to right, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0) 100%);
+  transition: opacity 300ms ease;
 }
 .carousel-fade-right {
-  background: linear-gradient(to left, rgba(0,0,0,0.45), rgba(0,0,0,0));
-  transition: opacity 220ms ease;
+  background: linear-gradient(to left, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0) 100%);
+  transition: opacity 300ms ease;
 }
 
 .carousel-fade-left,
