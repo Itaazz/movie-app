@@ -25,5 +25,14 @@
     "comment": "azeaz",
     "rating": 5,
     "createdAt": "2025-11-19T11:02:16.615Z"
+  },
+  {
+    "id": 4,
+    "movieId": 2,
+    "userId": 1,
+    "username": "demo",
+    "comment": "Super",
+    "rating": 5,
+    "createdAt": "2025-11-26T22:31:19.156Z"
   }
 ]

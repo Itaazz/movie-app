@@ -1,18 +1,29 @@
 <script setup lang="ts">
 const route = useRoute()
 const router = useRouter()
-const { getMovie } = useMovies()
+const { getMovie, searchMovies } = useMovies()
 import CommentsSection from '../../components/CommentsSection.vue'
-import ActorCard from '../../components/ActorCard.vue'
 import StarRating from '../../components/StarRating.vue'
 const { user } = useAuth()
-const { addFavorite } = useFavorites()
 
 const movieId = parseInt(route.params.id as string)
 
 const { data: movie, error: movieError } = await useAsyncData(
   `movie-${movieId}`,
   () => getMovie(movieId)
+)
+
+// Fetch similar movies (same genre)
+const { data: similarMoviesData } = await useAsyncData(
+  `similar-${movieId}`,
+  async () => {
+    if (!movie.value?.genre?.[0]) return { movies: [] }
+    return searchMovies({ genre: movie.value.genre[0], limit: 8 })
+  }
+)
+
+const similarMovies = computed(() => 
+  (similarMoviesData.value?.movies || []).filter((m: any) => m.id !== movieId)
 )
 
 import { ref } from 'vue'
@@ -42,108 +53,135 @@ async function setRating (value: number) {
     alert('Impossible d\'enregistrer votre note pour le moment.')
   }
 }
-
-
-
-const handleAddFavorite = async () => {
-  if (!user.value) {
-    alert('Vous devez être connecté pour ajouter aux favoris')
-    return
-  }
-
-  try {
-    await addFavorite(user.value.id, movieId)
-    alert('Film ajouté aux favoris !')
-  } catch (error) {
-    console.error('Erreur:', error)
-  }
-}
-
-function handleBack() {
-  if (typeof window !== 'undefined' && window.history.length > 1) {
-    router.back()
-  } else {
-    router.push('/films')
-  }
-}
 </script>
 
 <template>
-  <div class="container mx-auto p-6">
+  <div class="min-h-screen">
     <transition name="fade">
       <div v-if="toast" class="fixed right-6 bottom-6 z-50 bg-black/85 text-white px-4 py-2 rounded shadow-md">{{ toast }}</div>
     </transition>
-    <button @click="handleBack" class="text-primary hover:underline mb-4 inline-block">
-      ← Retour à la liste
-    </button>
 
-    <div v-if="movieError" class="text-destructive">
+    <div v-if="movieError" class="container mx-auto px-4 py-8 text-destructive">
       <p>Film non trouvé</p>
     </div>
 
-    <div v-else-if="movie" class="space-y-8">
-      <div class="flex flex-col md:flex-row gap-6">
-        <img 
-          :src="movie.poster" 
-          :alt="movie.title"
-          class="w-full md:w-80 h-auto rounded-lg shadow-lg"
-        />
-        
-        <div class="flex-1">
-          <h1 class="text-4xl font-bold mb-2">{{ movie.title }}</h1>
-          <p class="text-xl text-muted-foreground mb-4">{{ movie.year }}</p>
+    <div v-else-if="movie" class="pb-12">
+      <!-- Hero Section with Poster and Info -->
+      <div class="container mx-auto px-4 py-8">
+        <div class="flex flex-col md:flex-row gap-8 items-start">
+          <!-- Left: Poster -->
+          <div class="w-full md:w-auto flex-shrink-0">
+            <img 
+              :src="movie.poster" 
+              :alt="movie.title"
+              class="w-full md:w-[320px] rounded-sm shadow-2xl"
+            />
+          </div>
           
-          <div class="flex items-center gap-4 mb-4">
-            <div class="flex items-center">
-              <span class="text-accent text-2xl">★</span>
-              <span class="ml-1 text-xl font-medium">{{ movie.rating }}/10</span>
-            </div>
-            <div class="ml-4 flex items-center gap-4">
-              <div class="text-sm text-muted-foreground">Votre note :</div>
+          <!-- Right: Movie Info -->
+          <div class="flex-1 relative">
+            <!-- Rating Stars (top right) -->
+            <div class="absolute top-0 right-0 flex flex-col items-end gap-2">
+              <h3 class="text-2xl font-bold text-white mb-2">Notes</h3>
               <StarRating v-model:modelValue="userRating" @rated="setRating" />
             </div>
 
-            <button 
-              @click="handleAddFavorite"
-              class="px-4 py-2 bg-primary text-primary-foreground rounded hover:bg-primary/90"
-            >
-              ⭐ Ajouter aux favoris
-            </button>
-          </div>
-
-          <div class="mb-4">
-            <h2 class="text-lg font-semibold mb-2">Genres</h2>
-            <div class="flex flex-wrap gap-2">
-              <span 
-                v-for="genre in movie.genre" 
-                :key="genre"
-                class="bg-muted rounded px-3 py-1"
-              >
-                {{ genre }}
-              </span>
+            <!-- Title -->
+            <h1 class="text-6xl font-bold text-white mb-4 pr-32" style="letter-spacing: 0.02em;">
+              {{ movie.title }}
+            </h1>
+            
+            <!-- Release Date / Duration / Genres -->
+            <div class="text-sm mb-6">
+              <span class="text-yellow-400 underline decoration-yellow-400">{{ movie.year }}</span>
+              <span class="text-white/60 mx-2">/</span>
+              <span class="text-white/80">2h 30min</span>
+              <span class="text-white/60 mx-2">/</span>
+              <span class="text-white/80">{{ movie.genre?.join(', ') || 'Action, Science fiction' }}</span>
             </div>
-          </div>
 
-          <div class="mb-4">
-            <h2 class="text-lg font-semibold mb-2">Réalisateur</h2>
-            <p>{{ movie.director }}</p>
-          </div>
+            <!-- Director & Cast -->
+            <div class="space-y-2 mb-8 text-sm">
+              <div>
+                <span class="text-white/60">De</span>
+                <span class="text-yellow-400 ml-2 underline decoration-yellow-400">{{ movie.director }}</span>
+              </div>
+              <div>
+                <span class="text-white/60">Avec</span>
+                <span class="text-yellow-400 ml-2" v-for="(actor, idx) in movie.actors?.slice(0, 3)" :key="actor.name">
+                  <span class="underline decoration-yellow-400">{{ actor.name }}</span><span v-if="idx < 2" class="text-white/60">, </span>
+                </span>
+              </div>
+            </div>
 
-          <div class="mb-4">
-            <h2 class="text-lg font-semibold mb-2">Synopsis</h2>
-            <p class="text-foreground leading-relaxed">{{ movie.synopsis }}</p>
-          </div>
-
-          <div>
-            <h2 class="text-lg font-semibold mb-2">Acteurs</h2>
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <ActorCard v-for="actor in movie.actors" :key="actor.name" :actor="actor" />
+            <!-- Synopsis Section -->
+            <div class="mt-8">
+              <h2 class="text-3xl font-bold text-white mb-4">Synopsis</h2>
+              <p class="text-white/80 leading-relaxed text-base max-w-3xl">
+                {{ movie.synopsis }}
+              </p>
             </div>
           </div>
         </div>
       </div>
 
-      <CommentsSection :movieId="movieId" />
+      <!-- Casting Section -->
+      <div class="container mx-auto px-4 mt-16">
+        <h2 class="text-3xl font-bold text-white mb-6">
+          Le Casting <span class="text-yellow-400">. {{ movie.actors?.length || 0 }}</span>
+        </h2>
+        <div class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+          <div 
+            v-for="actor in movie.actors" 
+            :key="actor.name"
+            class="flex-shrink-0 w-48"
+          >
+            <img 
+              :src="actor.image || '/placeholder-actor.jpg'" 
+              :alt="actor.name"
+              class="w-full h-64 object-cover rounded-sm mb-3"
+            />
+            <h3 class="text-white font-semibold text-sm">{{ actor.name }}</h3>
+            <p class="text-yellow-400 text-xs">{{ (actor as any).role || 'Acteur' }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Similar Movies Section -->
+      <div class="container mx-auto px-4 mt-16" v-if="similarMovies.length > 0">
+        <h2 class="text-3xl font-bold text-white mb-6">Films similaires</h2>
+        <div class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+          <NuxtLink 
+            v-for="similar in similarMovies" 
+            :key="similar.id"
+            :to="`/movies/${similar.id}`"
+            class="flex-shrink-0 w-48 group"
+          >
+            <img 
+              :src="similar.poster" 
+              :alt="similar.title"
+              class="w-full h-72 object-cover rounded-sm mb-3 group-hover:opacity-80 transition-opacity"
+            />
+            <h3 class="text-white font-semibold text-sm">{{ similar.title }}</h3>
+          </NuxtLink>
+        </div>
+      </div>
+
+      <!-- Comments Section -->
+      <div class="container mx-auto px-4 mt-16">
+        <h2 class="text-3xl font-bold text-white mb-6">Commentaires</h2>
+        <CommentsSection :movieId="movieId" />
+      </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+</style>
