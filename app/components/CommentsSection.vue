@@ -39,39 +39,58 @@ const submitComment = async () => {
 </script>
 
 <template>
-  <div class="border-t pt-8">
-    <h2 class="text-2xl font-bold mb-6">
-      Commentaires ({{ comments?.length || 0 }})
-    </h2>
-
-    <div v-if="user" class="bg-muted p-4 rounded-lg mb-6">
-      <h3 class="font-semibold mb-3">Ajouter un commentaire</h3>
-      <div class="mb-3">
-        <label class="block mb-2">Note : {{ newRating }}/10</label>
-        <input v-model.number="newRating" type="range" min="0" max="10" class="w-full" />
-      </div>
-      <textarea v-model="newComment" placeholder="Votre commentaire..." class="w-full p-2 border border-input rounded mb-3" rows="4"></textarea>
-      <button @click="submitComment" :disabled="isSubmitting || !newComment.trim()" class="px-4 py-2 bg-primary text-primary-foreground rounded hover:bg-primary/90 disabled:opacity-50">
-        {{ isSubmitting ? 'Envoi...' : 'Publier' }}
+  <div class="mt-12">
+    <!-- Form to add comment -->
+    <div v-if="user" class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6 mb-8">
+      <h3 class="text-yellow-400 font-semibold text-lg mb-4">Ajouter un commentaire</h3>
+      
+      <textarea 
+        v-model="newComment" 
+        placeholder="Écrivez votre avis sur ce film..."
+        class="w-full p-4 bg-black/30 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-red-400/50 focus:border-red-400/50 mb-4 resize-none"
+        rows="4"
+      ></textarea>
+      
+      <button 
+        @click="submitComment" 
+        :disabled="isSubmitting || !newComment.trim()" 
+        class="px-6 py-3 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        {{ isSubmitting ? 'Envoi en cours...' : 'Publier le commentaire' }}
       </button>
     </div>
 
-    <p v-else class="text-muted-foreground mb-6">Connectez-vous pour laisser un commentaire</p>
+    <p v-else class="text-white/60 mb-8 text-center py-8 bg-white/5 rounded-lg border border-white/10">
+      Connectez-vous pour laisser un commentaire
+    </p>
 
-    <div class="space-y-4">
-      <div v-for="comment in comments" :key="comment.id" class="bg-card p-4 rounded-lg shadow">
-        <div class="flex justify-between items-start mb-2">
-          <div>
-            <span class="font-semibold">{{ comment.username }}</span>
-            <span class="text-sm text-muted-foreground ml-2">{{ new Date(comment.createdAt).toLocaleDateString('fr-FR') }}</span>
-          </div>
-          <div class="flex items-center">
-            <span class="text-accent">★</span>
-            <span class="ml-1 font-medium">{{ comment.rating }}/10</span>
-          </div>
+    <!-- Comments Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div 
+        v-for="comment in comments" 
+        :key="comment.id" 
+        class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6 hover:bg-white/10 transition-colors"
+      >
+        <!-- Comment Header -->
+        <div class="mb-4">
+          <h4 class="text-yellow-400 font-semibold text-lg mb-1">
+            {{ comment.username || 'Utilisateur' }}
+          </h4>
+          <span class="text-white/60 text-sm">{{ new Date(comment.createdAt).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) }}</span>
         </div>
-        <p class="text-foreground">{{ comment.comment }}</p>
+        
+        <!-- Comment Body -->
+        <p class="text-white/80 leading-relaxed">
+          {{ comment.comment }}
+        </p>
       </div>
+    </div>
+
+    <!-- Empty state -->
+    <div v-if="!comments || comments.length === 0" class="text-center py-12">
+      <p class="text-white/60 text-lg">Aucun commentaire pour le moment. Soyez le premier à donner votre avis !</p>
     </div>
   </div>
 </template>
+
+
